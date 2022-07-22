@@ -15,33 +15,59 @@ Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the 
 * Axios
 * PostgreSQL
 
-### Installing
+### OpenWeather API Key
 
-1. Create an <code> .env </code> in the **/backend** directory where you'll be providing the required API Keys. 
+1. Create an <code> .env </code> in the **/backend** directory where you'll be providing the required API key. 
 
 2. Obtain the Current Weather API key from **<a href="https://openweathermap.org/api">OpenWeather API</a>**. Place the API key in the ```.env ``` file you created in the backend. 
 
-### Executing program
+<br>  
 
+### Backend Setup
+1. Open your terminal and install all backend dependencies while in the main **/backend** directory.
+
+```
+npm install
+```
+
+2. Run psql as postgres user
+
+```
+psql --u postgres
+```
+
+3. Once psql is launched, create a Database named **imdex**, then switch to the imdex database.
+```
+postgres=# CREATE DATABASE imdex;
+postgres=# /c imdex;
+```
+
+4. Insert Users Database schema
+```
+imdex=# \i db/schema/01_users.sql
+```
+
+5. Open your terminal and navigate to your **/backend** folder then run the server.  
+```
+npm start
+```
+<br>  
+
+### Frontend Setup  
 1. Install all frontend dependencies while in the main **/frontend** directory.
 ```
 npm install
 ```
 
-2. Open another terminal and install all backend dependencies while in the main **/backend** directory.
 
-```
-npm install
-```
-
-4. Launch the frontend client and backend server with the two terminals open.
+2. Launch the frontend client and backend server with the two terminals open.
 ```
 npm start
 ```
 
 5. Lastly, visit the website on your localhost.
 ```
-http://localhost:3001/
+http://localhost:3000/
 ```
 
 ## Authors
