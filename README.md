@@ -88,7 +88,7 @@ npm install
 ```
 
 
-2. Launch the frontend client and backend server with the two terminals open.
+2. Launch the frontend client.
 ```
 npm start
 ```
