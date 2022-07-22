@@ -47,7 +47,7 @@ const options = {
     },
   },
   baseDir: __dirname,
-  // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
+  // Global pattern to find your jsdoc files (multiple patterns can be added in an array)
   filesPattern: './**/*.js',
   // URL where SwaggerUI will be rendered
   swaggerUIPath: '/api-docs',
@@ -60,10 +60,10 @@ const options = {
   // Set non-required fields as nullable by default
   notRequiredAsNullable: false,
   // You can customize your UI options.
-  // you can extend swagger-ui-express config. You can checkout an example of this
+  // You can extend swagger-ui-express config. You can checkout an example of this
   // in the `example/configuration/swaggerOptions.js`
   swaggerUiOptions: {},
-  // multiple option in case you want more that one instance
+  // Multiple options in case you want more than one instance
   multiple: true,
 };
 expressJSDocSwagger(app)(options);
@@ -83,36 +83,48 @@ const queryInsert = async (username, password, city) =>{
   });
 };
 
+
 /**
- * createUser schema
- * @typedef {object} register
- * @property {string} username.required - The mobile
- * @property {string} password.required - The mobile
- * @property {string} city.required - The mobile
+ * register schema
+ * @typedef {object} Register
+ * @property {string} username.required
+ * @property {string} password.required
+ * @property {string} city.required
  */
 
 /**
  * POST /register
- * @summary  register user uisng username, password and city
- * @param {register} request.body.required - register info
+ * @summary  register user using username, password and city
+ * @param {Register} request.body.required - register info
  * @security BasicAuth
  * @tags Users
- * @return {object} 201 - register response
- * @return {object} 400 - Bad request response
+ * @return {object} 201 - Created
+ * @example response - 201 - Created
+ *  {
+ *       "username": "kevinfake15",
+ *       "city": "Vancouver",
+ *       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluZmFrZTE1IiwiY2l0eSI6IlZhbmNvdXZlciIsImlhdCI6MTY1ODUxNzM4OCwiZXhwIjoxNjU4NTI0NTg4fQ.n_lfFk2QNYzcILEvIO4HPNdxxkvecnYGDiRkPGFnKlk"
+ *  }
+ * @return {object} 400 - Bad request
+ * @example response - 400 - Bad request
+ *  { "status": "Please verify you've entered all the required information." }
+ * @return {object} 409 - User exists
+ * @example response - 409 - User exists
+ *  { "status": "User Already Exists. Please Login." }
  */
 
 app.post("/register", async (req, res) => {
   try {
     const { username, password, city } = req.body;
     if (!(username && password && city)) {
-      res.status(400).send("All input is required");
+      res.status(400).send({"status": "Please verify you've entered all the required information." });
     }
-    // check if user already exist
-    // Validate if user exist in our database
+    // check if user already exists
+    // Validate if user exists in our database
     const oldUser = await db.query(`SELECT * FROM users WHERE username = '${ username }'`);
     console.log("OLD USER: >>>> ", oldUser.rowCount)
     if (oldUser.rowCount > 0) {
-      return res.status(409).send("User Already Exist. Please Login");
+      return res.status(409).send({ "status": "User Already Exists. Please Login." });
     }
     encryptedPassword = await bcrypt.hash(password, 10);
 
@@ -138,7 +150,7 @@ app.post("/register", async (req, res) => {
 /**
  * login schema
  * @typedef {object} Login
- * @property {string} username.required -
+ * @property {string} username.required
  * @property {string} password.required
  */
 
@@ -149,12 +161,12 @@ app.post("/register", async (req, res) => {
  * @security BasicAuth
  * @tags Users
  * @return {object} 200 - login response
- * @example response - 200 - success response example
+ * @example response - 200 - success
  *  {
  *   "username": "username",
  *   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluZmFrZTEzIiwiY2l0eSI6IlZhbmNvdXZlciIsImlhdCI6MTY1ODQ3MTY4NywiZXhwIjoxNjU4NDc4ODg3fQ.0BD1O4bDEUgoq4UjopzB_BDNOSPQZWjL3VmTriAflco"
  *  }
- * @return {object} 400 - Bad request response
+ * @return {object} 400 - Bad request
  */
 
 app.post("/login", async (req, res) => {
@@ -184,7 +196,7 @@ app.post("/login", async (req, res) => {
       }
       return res.status(409).send("Invalid Credentials");
     }
-     return res.status(409).send("User Not Exist");
+     return res.status(409).send("User Doesn't Exist");
 
   } catch (err) {
     console.log(err);
@@ -199,7 +211,7 @@ app.post("/login", async (req, res) => {
 
 /**
  * GET /weather
- * @summary  weather end point with city name
+ * @summary  weather end point with city name (login token required)
  * @param {Weather} request.query.required - weather info 
  * @security BasicAuth
  * @tags Users
