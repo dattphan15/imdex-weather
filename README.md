@@ -4,6 +4,8 @@ Imdex Weather is a single-page weather app built with React and ExpressJS.
 
 [React Client Demo](http://ec2-50-18-229-167.us-west-1.compute.amazonaws.com/)
 
+![imdex-weather](assets/media/imdex-weather.gif)
+
 ## Description
 Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the Imdex Weather app allows users to search over 200,000 cities to see what the weather is like for the city being searched. Users can view details such as the Temperature, Humidity, and Description of the weather (Sunny, Cloudy, Rain, etc.)
 
@@ -56,8 +58,11 @@ npm start
 
 6. Access the Swagger API Docs at this url
 ```
-http://localhost:3001/api-docs/
-```
+http://localhost:3001/api-docs/  
+```  
+
+![swagger-api](assets/media/imdex-weather-swagger-api.png)
+
 <br>  
 
 ### Frontend Setup  
@@ -72,7 +77,7 @@ npm install
 npm start
 ```
 
-5. Lastly, visit the website on your localhost.
+5. Lastly, visit the website on your localhost and start searching cities.
 ```
 http://localhost:3000/
 ```
