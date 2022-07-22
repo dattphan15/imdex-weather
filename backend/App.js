@@ -2,9 +2,15 @@ const express = require("express");
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const request = require('request');
+const expressJSDocSwagger = require('express-jsdoc-swagger');
+const { graphqlHTTP } = require('express-graphql');
+const graphql = require("graphql");
+const { GraphQLSchema } = graphql;
+const { query } = require("./schema/query");
+// const { mutation } = require("./schemas/mutations");
 const auth =  require('./middleware/auth')
 
-const expressJSDocSwagger = require('express-jsdoc-swagger');
 
 
 
@@ -16,6 +22,14 @@ const ENV        = process.env.ENV || "development";
 const app = express();
 app.use(cors())
 app.use(express.json());
+
+
+const schema = new GraphQLSchema({
+  query
+  // mutation
+});
+
+app.use('/graphql', graphqlHTTP({  schema: schema,  graphiql: true}));
 
 const options = {
   info: {
@@ -178,35 +192,49 @@ app.post("/login", async (req, res) => {
 });
 
 /**
- * login schema
- * @typedef {object} Login
- * @property {string} username.required -
- * @property {string} password.required
+ * weather schema
+ * @typedef {object} Weather
+ * @property {string} city.query.required - City name is required
  */
 
 /**
- * POST /login
- * @summary  login end point with username and password
- * @param {Login} request.body.required - login info 
+ * GET /weather
+ * @summary  weather end point with city name
+ * @param {Weather} request.query.required - weather info 
  * @security BasicAuth
  * @tags Users
- * @return {object} 200 - login response
+ * @return {object} 200 - weather response
  * @example response - 200 - success response example
- *  {
- *   "username": "username",
- *   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImtldmluZmFrZTEzIiwiY2l0eSI6IlZhbmNvdXZlciIsImlhdCI6MTY1ODQ3MTY4NywiZXhwIjoxNjU4NDc4ODg3fQ.0BD1O4bDEUgoq4UjopzB_BDNOSPQZWjL3VmTriAflco"
- *  }
  * @return {object} 400 - Bad request response
  */
 
-app.get("/weather", async (req, res) => {
+app.get("/weather", auth, async (req, res) => {
   try {
-
-  }catch(err){
-
+    if (!req.query.city) {
+        return res.status(400).send("city name is required");
+    }
+    const city = req.query.city
+    const weather = await requestFun(city)
+    // console.log('weather',weather);
+    return res.status(200).send({"status":true,data:JSON.parse(weather)});
+  } catch(err) {
   }
 }) 
 
+
+const requestFun = (location) =>{
+    
+  const promi = new Promise((resolve, reject) => {
+      request({uri: `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.API_KEY}`,
+          method: 'GET'
+        }, (err, res, body) => {
+          if (err) { reject(err); }
+          resolve(body) 
+      });
+  })
+  return promi;
+
+}
 // All other GET requests not handled before will return our React app
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
