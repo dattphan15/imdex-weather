@@ -56,12 +56,28 @@ imdex=# \i db/schema/01_users.sql
 npm start
 ```
 
-6. Access the Swagger API Docs at this url
+6. To access the Swagger API Docs, visit this url.
 ```
 http://localhost:3001/api-docs/  
 ```  
 
 ![swagger-api](assets/media/imdex-weather-swagger-api.png)
+
+7. To access the GraphQL interface, visit this url.
+
+```
+http://localhost:3001/graphql
+```
+ex. query, returns user username, and city.
+```
+{
+  user(id:6) {
+    username,
+    city
+  }
+}
+```
+![graphQL](assets/media/graphql.gif)
 
 <br>  
 
