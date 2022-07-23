@@ -1,4 +1,4 @@
-# Project Title
+# Imdex Weather
 
 Imdex Weather is a single-page weather app built with React and ExpressJS.
 
