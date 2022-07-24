@@ -1,4 +1,4 @@
-# Project Title
+# Imdex Weather
 
 Imdex Weather is a single-page weather app built with React and ExpressJS.
 
@@ -88,7 +88,7 @@ npm install
 ```
 
 
-2. Launch the frontend client and backend server with the two terminals open.
+2. Launch the frontend client.
 ```
 npm start
 ```
