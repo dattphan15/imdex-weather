@@ -13,8 +13,8 @@ Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the 
 
 ### Dependencies
 
-* Node v14.19.2^
-* ReactJS
+* Node 14.19.2^
+* React 17.0.0^
 * ExpressJS
 * Axios
 * PostgreSQL

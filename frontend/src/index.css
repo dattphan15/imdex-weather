@@ -3,6 +3,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 body {
@@ -12,6 +13,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
 }
 
 p {
@@ -22,7 +24,7 @@ h1 {
   font-size: 6rem;
 }
 
-.app {
+.home {
   width: 100%;
   height: 100vh;
   position: relative;
@@ -30,7 +32,7 @@ h1 {
   color: #fff;
 }
 
-.app:before {
+.home:before {
   content: '';
   background: url('./assets/imdex-weather.jpg') no-repeat center center/cover;
   position: absolute;
@@ -41,17 +43,19 @@ h1 {
   z-index: -1;
 }
 
-.app .search {
+.home .search {
   text-align: center;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 0rem;
+  display: flex;
 }
 
-.app input {
+.home input {
   padding: .7rem 1.5rem;
-  font-size: 1.2rem;
+  font-size: 2rem;
   border-radius: 25px;
   border: 1px solid rgba(255,255,255, 0.8);
-  background: rgba(255,255,255, 0.1);
+  background: rgba(255, 255, 255, 0.4);
+  color: white;
 }
 
 ::placeholder {
@@ -63,6 +67,7 @@ h1 {
   height: 700px;
   margin: auto;
   padding: 0 1rem;
+  padding-top: 20px;
   position: relative;
   top: 10%;
   display: flex;
@@ -70,19 +75,19 @@ h1 {
   justify-content: space-between;
 }
 
-.app .top {
+.home .top {
   width: 100%;
   margin: 1rem auto;
 }
 
-.app .description {
+.home .description {
   position: relative;
   right: -90%;
   transform-origin: 0 0;
   transform: rotate(269deg);
 }
 
-.app .bottom {
+.home .bottom {
   display: flex;
   justify-content: space-evenly;
   text-align: center;
@@ -95,4 +100,21 @@ h1 {
 
 .bold {
   font-weight: 700;
+}
+
+.results {
+  font-size: 0.8rem;
+  padding-left: 10px;
+}
+
+span.checkbox {
+  justify-content: flex-start;
+}
+
+.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+  margin-left: -300px;
+}
+
+#password {
+  min-width: 320px;
 }
