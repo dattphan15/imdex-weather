@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Switch } from "react-router-dom";
 import { useState } from "react";
 import Nav from "./Nav";
 import Login from "./Login";
@@ -30,14 +30,17 @@ const Main = (props) => {
       direction="column"
       style={{ position: "relative", width: "100%" }}
     >
-      <Grid item>
+      {/* <Grid item>
         <Nav logoutHandler={logoutHandler} user={user} />
-      </Grid>
+      </Grid> */}
       <Routes>
-        <Route exact path="/login" element={<Login/>} />
+        <Route exact path="/" element={<Login/>} />
+        <Route path="/login" element={<Login/>} />
         <Route exact path="/register" element={<Register/>} />
-        <Route exact path="" element={<Home data={data} setLocation={setLocation} searchLocation={searchLocation} />} />
+        <Route exact path="/home" element={<Home data={data} setLocation={setLocation} searchLocation={searchLocation} logoutHandler={logoutHandler} />} />
+        
       </Routes>
+     
     </Grid>
   );
 };

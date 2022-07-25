@@ -1,14 +1,34 @@
+import React, { useEffect, useState } from 'react'
+import Nav from "./Nav";
+import { useCookies } from "react-cookie"
+import { useNavigate, useLocation } from "react-router-dom";
+
+
 const Home = (props) => {
 
+  const [cookies , setCookies] = useCookies(['user']);
+  const [ user, setUser ] = useState(null)
+  const history = useNavigate();
+
+  useEffect(()=>{
+    if(!cookies.token){
+      history("/");
+    }
+    setUser(cookies.tokendata);
+  },[])
+ 
   const {
     location,
     setLocation,
     searchLocation,
     data,
+    logoutHandler
   } = props
 
+  console.log('dd',user);
   return (
     <>
+    <Nav user={user} logoutHandler={logoutHandler} />
     <div className="home">
 
       <div className="container">

@@ -41,11 +41,11 @@ export default function Nav(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
-  const { logoutHandler } = props;
+  const { logoutHandler, user } = props;
 
-
+console.log(user,'user');
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -68,7 +68,7 @@ export default function Nav(props) {
       onClose={handleMenuClose}
     >
       {user && (
-        <MenuItem onClick={handleMenuClose}>
+        <MenuItem onClick={()=>handleMenuClose}>
           <Link to="/account">My Account</Link>
         </MenuItem>
       )}
@@ -111,7 +111,9 @@ export default function Nav(props) {
           </Typography>
 
           <div className={classes.login}>
-            {user ? null : (
+            {user ?  <Typography className={classes.title} variant="body2" noWrap>
+                  <p style={{color:"#a9a9a9", width:"0%" }} > { user?.username } </p>
+                </Typography> : (
               <Link className={classes.loginInner} to="/login">
                 <Typography className={classes.title} variant="body2" noWrap>
                   LOGIN

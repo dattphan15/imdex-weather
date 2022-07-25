@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import UserContext from "../contexts/UserContext";
+import { useCookies } from "react-cookie"
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -70,6 +71,7 @@ export default function Login(props) {
   const [values, setValues] = useState({
     showPassword: false,
   });
+  const [cookies , setCookies] = useCookies(['user'])
 
   const location = useLocation();
   const history = useNavigate();
@@ -80,7 +82,7 @@ export default function Login(props) {
 
     loginHandler(username, password).then(() => {
       console.log("LOGIN HANDLER: HOME PATH >>>>> ", location)
-      history("/");
+      history("/home");
       setOpenLogin((prev) => false);
     });
   };
@@ -133,7 +135,7 @@ export default function Login(props) {
                   <IconButton
                     className={classes.showPass}
                     aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
+                    onClick={()=>handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >

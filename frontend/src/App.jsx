@@ -3,7 +3,8 @@ import Main from "./components/Main";
 import NotLoggedIn from "./components/NotLoggedIn";
 import { createBrowserHistory } from 'history';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
-
+import jwt from "jwt-decode";
+import { Cookies, useCookies } from "react-cookie"
 import DataContext from "./contexts/DataContext";
 import UserContext from "./contexts/UserContext";
 import axios from 'axios'
@@ -14,6 +15,8 @@ function App() {
   const [location, setLocation] = useState('')
   const [user, setUser] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
+  const [cookies , setCookies] = useCookies(['user'])
+ 
   const handleLoginClose = () => {
     setOpenLogin(false);
   };
@@ -22,31 +25,35 @@ function App() {
 
   const searchLocation = (event) => {
     if (event.key === "Enter") {
-      axios.get(url).then((response) => {
-        setData(response.data)
-        console.log(response.data)
+      let tokenData = cookies.token
+      axios.get(`http://localhost:3001/weather?city=${location}`,{ headers:{ 'x-access-token': tokenData } }).then((response) => {
+        setData(response.data.data)
+        // console.log(response.data)
       })
       // setLocation("")
     }
   }
 
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:3001/api/users/authenticate")
-      .then((res) => setUser(res.data))
-      .catch((res) => {
-        console.log("there was an error authenticating");
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post("http://localhost:3001/api/users/authenticate")
+  //     .then((res) => setUser(res.data))
+  //     .catch((res) => {
+  //       console.log("there was an error authenticating");
+  //     });
+  // }, []);
 
 
   const loginHandler = (username, password) => {
     return axios
       .post("http://localhost:3001/api/users/login", { username: username, password: password })
       .then((res) => {
-        console.log("LOGIN HANDLER SET USER: >>>> ", res.data)
-        setUser(res.data);
+        let token = jwt(res.data);
+        setCookies('token',res.data,{ path: "/" });
+        setCookies('tokendata',token,{ path: "/" });
+        console.log("LOGIN HANDLER SET USER: >>>> ", res.data,token)
+        setUser(token);
       })
       .catch((err) => {
         console.error(err.message);
@@ -71,7 +78,10 @@ function App() {
   };
 
   const logoutHandler = () => {
-    axios.post("/api/users/logout").then((res) => setUser(res.data));
+    console.log('logouthandler');
+      cookies.remove('user');
+      cookies.remove('tokendata');
+      // history('/');
   };
 
   const {
