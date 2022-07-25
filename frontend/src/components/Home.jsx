@@ -25,7 +25,7 @@ const Home = (props) => {
     logoutHandler
   } = props
 
-  console.log('dd',user);
+  //console.log('dd',user);
   return (
     <>
     <Nav user={user} logoutHandler={logoutHandler} />

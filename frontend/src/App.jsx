@@ -22,13 +22,13 @@ function App() {
   };
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=d1071bb1135354df20150f668ce62347`
-
+  console.log(cookies.token,'tokendata')
   const searchLocation = (event) => {
     if (event.key === "Enter") {
       let tokenData = cookies.token
       axios.get(`http://localhost:3001/weather?city=${location}`,{ headers:{ 'x-access-token': tokenData } }).then((response) => {
         setData(response.data.data)
-        // console.log(response.data)
+        // 
       })
       // setLocation("")
     }
@@ -52,7 +52,7 @@ function App() {
         let token = jwt(res.data);
         setCookies('token',res.data,{ path: "/" });
         setCookies('tokendata',token,{ path: "/" });
-        console.log("LOGIN HANDLER SET USER: >>>> ", res.data,token)
+        //console.log("LOGIN HANDLER SET USER: >>>> ", res.data,token)
         setUser(token);
       })
       .catch((err) => {
@@ -89,7 +89,7 @@ function App() {
   } = useApplicationData();
 
   let myHistory = createBrowserHistory();
-  console.log("APPLICATION STATE: >>>> ", state)
+  //console.log("APPLICATION STATE: >>>> ", state)
 
   return (
       <HistoryRouter location={myHistory.location} history={myHistory}>

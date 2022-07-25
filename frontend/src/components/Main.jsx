@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 
 const Main = (props) => {
 
-  console.log("MAIN PROPS: >>>> ", props)
+  //console.log("MAIN PROPS: >>>> ", props)
 
   const {
     user,
@@ -22,7 +22,7 @@ const Main = (props) => {
     logoutHandler,
   } = props;
 
-  console.log("MAIN PROPS 2: >>>> ", props)
+  //console.log("MAIN PROPS 2: >>>> ", props)
 
   return (
     <Grid

@@ -45,7 +45,7 @@ export default function Nav(props) {
 
   const { logoutHandler, user } = props;
 
-console.log(user,'user');
+//console.log(user,'user');
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };

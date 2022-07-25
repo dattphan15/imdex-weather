@@ -5,7 +5,6 @@ const config = process.env;
 const verifyToken = (req, res, next) => {
   // const authHeader = req.headers['authorization']
   // const token = authHeader && authHeader.split(' ')[1]
-  
 
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];

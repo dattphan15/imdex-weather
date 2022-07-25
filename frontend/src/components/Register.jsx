@@ -57,10 +57,10 @@ export default function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("REGISTER HANDLE SUBMIT: >>>> ")
+    // console.log("REGISTER HANDLE SUBMIT: >>>> ")
     registerHandler(username, password, city).then((data) => {
       if (data === "ok") {
-        console.log("OK >>>> ")
+        //console.log("OK >>>> ")
         history("/");
       }
       setError("Email already exists");
