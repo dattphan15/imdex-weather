@@ -6,6 +6,8 @@ Imdex Weather is a single-page weather app built with React and ExpressJS.
 
 ![imdex-weather](assets/media/imdex-weather-v2.gif)
 
+![imdex-weather-register](assets/media/imdex-register.gif)
+
 ## Description
 Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the Imdex Weather app allows users to search over 200,000 cities to see what the weather is like for the city being searched. Users can view details such as the Temperature, Humidity, and Description of the weather (Sunny, Cloudy, Rain, etc.)
 
