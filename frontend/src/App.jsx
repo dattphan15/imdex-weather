@@ -15,7 +15,7 @@ function App() {
   const [location, setLocation] = useState('')
   const [user, setUser] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
-  const [cookies , setCookies] = useCookies(['user'])
+  const [cookies , setCookies, removeCookies] = useCookies(['user'])
  
   const handleLoginClose = () => {
     setOpenLogin(false);
@@ -79,8 +79,10 @@ function App() {
 
   const logoutHandler = () => {
     console.log('logouthandler');
-      cookies.remove('user');
-      cookies.remove('tokendata');
+      removeCookies("user")
+      removeCookies("tokendata")
+      // cookies.remove('user');
+      // cookies.remove('tokendata');
       // history('/');
   };
 

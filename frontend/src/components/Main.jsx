@@ -35,7 +35,7 @@ const Main = (props) => {
       </Grid> */}
       <Routes>
         <Route exact path="/" element={<Login/>} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/login" element={<Login logoutHandler={logoutHandler} user={user}/>} />
         <Route exact path="/register" element={<Register/>} />
         <Route exact path="/home" element={<Home data={data} setLocation={setLocation} searchLocation={searchLocation} logoutHandler={logoutHandler} />} />
         

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Nav from "./Nav";
 import { useCookies } from "react-cookie"
 import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from '@mui/material';
+
 
 
 const Home = (props) => {
@@ -31,9 +34,14 @@ const Home = (props) => {
     <Nav user={user} logoutHandler={logoutHandler} />
     <div className="home">
 
+    { user ? 
+      <>
       <div className="container">
         <div className="top">
           <div className="location">
+          <div className="welcome">
+            Where are we headed?
+          </div>
           <div className="search">
             <input
               value={location}
@@ -69,9 +77,17 @@ const Home = (props) => {
           </div>
         </div>
         }
+      </div>
+        </>
+    :
+    <>
+    <div className="container login">
+      <Button variant="contained" href="/login" color="primary">Please login</Button>
+    </div>
+    </>
+    }
 
       </div>
-    </div>
     </>
   );
 };

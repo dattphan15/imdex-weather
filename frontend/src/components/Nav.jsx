@@ -5,9 +5,7 @@ import { makeStyles } from "@mui/styles";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import LoginIcon from '@mui/icons-material/Login';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -28,59 +26,38 @@ const useStyles = makeStyles((theme) => ({
   },
   login: {
     display: "flex",
-    justifyContent: "flex-end",
+    maxWidth: "500px",
+    alignItems: "center",
   },
-  loginInner: {
-    width: "100px",
+  navUser: {
+    display: "flex",
+    "&:hover": {
+      color: "#2b727b",
+    }
+  },
+  loginLogout: {
+    display: "flex",
+  },
+  logInner: {
+    display: "flex",
+    textDecoration: 'none',
+    color: "#a9a9a9",
+    "&:hover": {
+      color: "#2b727b",
+    }
+  },
+  navHome: {
+    maxWidth: "340px",
   }
 
 }));
 
 export default function Nav(props) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const isMenuOpen = Boolean(anchorEl);
   // const { user } = useContext(UserContext);
-
   const { logoutHandler, user } = props;
 
 //console.log(user,'user');
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-
-  const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      {user && (
-        <MenuItem onClick={()=>handleMenuClose}>
-          <Link to="/account">My Account</Link>
-        </MenuItem>
-      )}
-      {/* <MenuItem onClick={handleMenuClose}>
-        {user ? (
-          <Link onClick={logoutHandler}>Logout</Link>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-      </MenuItem> */}
-    </Menu>
-  );
 
 
   return (
@@ -96,7 +73,7 @@ export default function Nav(props) {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -105,26 +82,42 @@ export default function Nav(props) {
               letterSpacing: '.3rem',
               color: "#a9a9a9",
               textDecoration: 'none',
+              justifyContent: "space-between",
             }}
           >
+          <p className={classes.navHome}>
             IMDEX WEATHER
-          </Typography>
-
+          </p>
           <div className={classes.login}>
-            {user ?  <Typography className={classes.title} variant="body2" noWrap>
-                  <p style={{color:"#a9a9a9", width:"0%" }} > { user?.username } </p>
-                </Typography> : (
-              <Link className={classes.loginInner} to="/login">
-                <Typography className={classes.title} variant="body2" noWrap>
-                  LOGIN
-                  <LoginIcon/>
-                </Typography>
-              </Link>
+            {user ? 
+                  <>
+                  <div className={classes.navUser}>
+                    {/* <AccountCircleOutlinedIcon/> */}
+                      Account
+                  </div>
+                  <div className={classes.loginLogout}>
+                    <Link 
+                      onClick={logoutHandler} 
+                      to="/login" 
+                      className={classes.logInner}
+                      >
+                      Logout
+                    </Link>
+                  </div>
+                  </>
+
+                : (
+                <div className={classes.loginLogout}>
+                  <Link className={classes.logInner} to="/login">
+                    Login
+                  </Link>
+                </div>
             )}
           </div>
+          </Typography>
+
         </Toolbar>
       </AppBar>
-      {renderMenu}
     </div>
   );
 }

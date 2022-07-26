@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1d59eb75.css",
+    "main.js": "/static/js/main.ff96efc5.js",
+    "static/media/imdex-weather.jpg": "/static/media/imdex-weather.c9831ecf3e1f836a9edd.jpg",
+    "index.html": "/index.html",
+    "main.1d59eb75.css.map": "/static/css/main.1d59eb75.css.map",
+    "main.ff96efc5.js.map": "/static/js/main.ff96efc5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d59eb75.css",
+    "static/js/main.ff96efc5.js"
+  ]
+}
