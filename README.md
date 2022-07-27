@@ -110,12 +110,22 @@ http://localhost:3000/
 [Kevin Phan](https://www.linkedin.com/in/kevinphan15/)
 
 ## Version History
+See [release history](https://github.com/dattphan15/imdex-weather/releases)
 
-* 0.2
-    * Setup JWT Auth / Users model
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release without JWT Auth / Users
+* v2.0.1 release
+    * Styling improvements using Material UI.
+    * Add Logout.
+    * See [commit change](https://github.com/dattphan15/imdex-weather/commit/7c3ee310be0deaca81a999ed9ac1c60a33903562)
+* v2.0.0 release (major update)
+    * Added frontend components for Login/Register, Navbar.
+    * Search bar redesign.
+    * Refactor backend user queries.
+    * See [commit change](https://github.com/dattphan15/imdex-weather/commit/dd5ebc6531ebc9a1229b3bcbc8ba1701502b25d3)
+* v1.0.0 initial release
+    * Initial, lightweight release with a simple search bar to use the OpenWeather API.
+    * Swagger API documentation setup.
+    * GraphQL setup.
+    * See [commit change](https://github.com/dattphan15/imdex-weather/commit/471cbc880363b3541bcca7e64faffe0930cf5fbc)
 
 ## License
 
