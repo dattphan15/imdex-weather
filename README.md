@@ -1,8 +1,14 @@
 # Imdex Weather
 
 Imdex Weather is a single-page weather app built with React and ExpressJS.
+## Live Demos
 
 [React Client Demo](http://ec2-50-18-229-167.us-west-1.compute.amazonaws.com/)
+
+[GraphQL Demo](http://ec2-50-18-229-167.us-west-1.compute.amazonaws.com/backend/graphql)
+
+[Swagger API Documentation](http://ec2-50-18-229-167.us-west-1.compute.amazonaws.com/backend/api-docs)
+
 
 ![imdex-weather](assets/media/imdex-weather-v2.gif)
 
@@ -15,11 +21,11 @@ Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the 
 
 ### Dependencies
 
-* Node 14.19.2^
-* React 17.0.0^
-* ExpressJS
-* Axios
-* PostgreSQL
+* Node ^14.19.2
+* React ^17.0.0
+* ExpressJS ^4.18.1
+* Axios ^0.27.2
+* PostgreSQL ^8.7.3
 
 ### OpenWeather API Key
 
