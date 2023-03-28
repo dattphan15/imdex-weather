@@ -117,7 +117,7 @@ export default function Login(props) {
           <Button
             type="submit"
             fullWidth
-            variant="outlined"
+            variant="contained"
             color="primary"
             className={classes.submit}
           >

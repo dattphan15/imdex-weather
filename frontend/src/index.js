@@ -11,6 +11,24 @@ import {
 
 let theme = createTheme({
 // add custom theme styles here
+palette: {
+  type: "light",
+  primary: {
+    main: "#2b727b",
+  },
+  secondary: {
+    main: "#646264",
+  },
+  text: {
+    primary: "#252b2d",
+    secondary: "rgba(61,58,58,0.54)",
+    light: "rgb(250, 244, 234)",
+  },
+  background: {
+    default: "#ffffff",
+    secondary: "rgb(249,246,235)",
+  },
+},
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

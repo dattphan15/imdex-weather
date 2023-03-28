@@ -1,10 +1,17 @@
 # Imdex Weather
 
 Imdex Weather is a single-page weather app built with React and ExpressJS.
+## Live Demos
 
 [React Client Demo](http://ec2-50-18-229-167.us-west-1.compute.amazonaws.com/)
 
-![imdex-weather](assets/media/imdex-weather-v2.gif)
+[GraphQL Demo](http://ec2-50-18-229-167.us-west-1.compute.amazonaws.com/backend/graphql)
+
+[Swagger API Documentation](http://ec2-50-18-229-167.us-west-1.compute.amazonaws.com/backend/api-docs)
+
+
+![imdex-weather](assets/media/imdex-weather-v201.gif)
+
 
 ## Description
 Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the Imdex Weather app allows users to search over 200,000 cities to see what the weather is like for the city being searched. Users can view details such as the Temperature, Humidity, and Description of the weather (Sunny, Cloudy, Rain, etc.)
@@ -13,11 +20,11 @@ Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the 
 
 ### Dependencies
 
-* Node 14.19.2^
-* React 17.0.0^
-* ExpressJS
-* Axios
-* PostgreSQL
+* Node ^14.19.2
+* React ^17.0.0
+* ExpressJS ^4.18.1
+* Axios ^0.27.2
+* PostgreSQL ^8.7.3
 
 ### OpenWeather API Key
 
@@ -103,12 +110,22 @@ http://localhost:3000/
 [Kevin Phan](https://www.linkedin.com/in/kevinphan15/)
 
 ## Version History
+See [release history](https://github.com/dattphan15/imdex-weather/releases)
 
-* 0.2
-    * Setup JWT Auth / Users model
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release without JWT Auth / Users
+* v2.0.1 release
+    * Styling improvements using Material UI.
+    * Add Logout.
+    * See [commit change](https://github.com/dattphan15/imdex-weather/commit/7c3ee310be0deaca81a999ed9ac1c60a33903562)
+* v2.0.0 release (major update)
+    * Added frontend components for Login/Register, Navbar.
+    * Search bar redesign.
+    * Refactor backend user queries.
+    * See [commit change](https://github.com/dattphan15/imdex-weather/commit/dd5ebc6531ebc9a1229b3bcbc8ba1701502b25d3)
+* v1.0.0 initial release
+    * Initial, lightweight release with a simple search bar to use the OpenWeather API.
+    * Swagger API documentation setup.
+    * GraphQL setup.
+    * See [commit change](https://github.com/dattphan15/imdex-weather/commit/471cbc880363b3541bcca7e64faffe0930cf5fbc)
 
 ## License
 
