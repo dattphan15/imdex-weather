@@ -21,6 +21,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Nav from "./Nav";
 import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +65,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login(props) {
+
+  const {
+  user,
+  logoutHandler,
+} = props;
+
   const classes = useStyles();
   const { loginHandler, setOpenLogin } = useContext(UserContext);
   const [username, setUsername] = useState("");
@@ -95,6 +102,7 @@ export default function Login(props) {
 
   return (
     <Container component="main" maxWidth="xs" className={classes.container}>
+      <Nav user={user} logoutHandler={logoutHandler} />
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -150,7 +158,7 @@ export default function Login(props) {
           <Button
             type="submit"
             fullWidth
-            variant="outlined"
+            variant="contained"
             color="primary"
             className={classes.submit}
           >

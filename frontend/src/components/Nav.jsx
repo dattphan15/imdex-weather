@@ -30,12 +30,25 @@ const useStyles = makeStyles((theme) => ({
   },
   login: {
     display: "flex",
-    justifyContent: "flex-end",
+    maxWidth: "500px",
+    alignItems: "center",
+  },
+  navUser: {
+    display: "flex",
+    "&:hover": {
+      color: "#2b727b",
+    }
+  },
+  loginLogout: {
+    display: "flex",
   },
   loginInner: {
     width: "100px",
     display: "flex",
     alignItems: "center",
+    "&:hover": {
+      color: "#2b727b",
+    }
   },
   logout: {
     fontSize: "1rem",
@@ -111,7 +124,7 @@ export default function Nav(props) {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -120,6 +133,7 @@ export default function Nav(props) {
               letterSpacing: '.3rem',
               color: "#a9a9a9",
               textDecoration: 'none',
+              justifyContent: "space-between",
             }}
           >
             IMDEX WEATHER
@@ -129,25 +143,26 @@ export default function Nav(props) {
 
           <div className={classes.login}>
             {user ?  
-                  (
-                  <Typography className={classes.title}>
-                    <span className={classes.logout}> { user?.username } </span>
-                    <Link className={classes.loginInner} to="/login">
-                        <span style={{display:"flex", justifyContent:"space-between"}}>
-                          <span className={classes.logout} onClick={logout}> logout </span>
-                          <LoginIcon style={{color:"#a9a9a9"}} />
-                        </span>
-                    </Link>
-                  </Typography>
-                  )
-              : (
+            (
+              <Typography className={classes.title}>
+                <span className={classes.logout}> { user?.username } </span>
                 <Link className={classes.loginInner} to="/login">
-                  <Typography className={classes.title} variant="body2" noWrap>
-                    login
-                    <LoginIcon/>
-                  </Typography>
+                    <span style={{display:"flex", justifyContent:"space-between"}}>
+                      <span className={classes.logout} onClick={logout}> logout </span>
+                      <LoginIcon style={{color:"#a9a9a9"}} />
+                    </span>
                 </Link>
-                )
+              </Typography>
+            )
+            : 
+            (
+              <Link className={classes.loginInner} to="/login">
+                <Typography className={classes.title} variant="body2" noWrap>
+                  login
+                  <LoginIcon/>
+                </Typography>
+              </Link>
+            )
             }
           </div>
 
