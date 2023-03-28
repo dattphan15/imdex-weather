@@ -14,7 +14,7 @@ function useApplicationData() {
       axios.get("http://localhost:3001/api/users"),
     ]).then((all) => {
       // copy users into an object
-      console.log("APPLICATION USERS: >>>> ", all[0].data)
+      // console.log("APPLICATION USERS: >>>> ", all[0].data)
       const users = {};
       for (const user of all[0].data) {
         users[user.id] = user;

@@ -103,21 +103,25 @@ app.get("/weather", verifyToken, async (req, res) => {
         return res.status(400).send("city name is required");
     }
     const city = req.query.city
-    const weather = await requestFun(city)
-    // console.log('weather',weather);
+    const weather = await requestWeather(city)    
     return res.status(200).send({"status":true,data:JSON.parse(weather)});
-  } catch(err) {
-  }
+    } catch(err) {
+      return err
+    }
 }) 
 
 
-const requestFun = (location) =>{
-  const promi = new Promise((resolve, reject) => {
+const requestWeather = (location) =>{
+  promi = new Promise((resolve, reject) => {
       request({uri: `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.API_KEY}`,
           method: 'GET'
         }, (err, res, body) => {
-          if (err) { reject(err); }
-          resolve(body) 
+          if (err) { 
+            reject(err); 
+          }
+          if (!res.headersSent) {
+            resolve(body) 
+          }
       });
   })
   return promi;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Nav from "./Nav";
 import { useCookies } from "react-cookie"
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = (props) => {
@@ -14,7 +14,11 @@ const Home = (props) => {
     if(!cookies.token){
       history("/");
     }
-    setUser(cookies.tokendata);
+    if (cookies.tokendata) {
+      const tokenData = cookies.tokendata
+      tokenData.cookies = cookies.token
+      setUser(tokenData);
+    }
   },[])
  
   const {
@@ -22,7 +26,7 @@ const Home = (props) => {
     setLocation,
     searchLocation,
     data,
-    logoutHandler
+    logoutHandler,
   } = props
 
   //console.log('dd',user);

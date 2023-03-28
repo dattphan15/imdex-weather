@@ -14,9 +14,11 @@ const {
 
 
 router.get("/", (req, res) => {
-  console.log("GET USERS >>>> ")
   getUsers()
-    .then((data) => res.status(200).json(data))
+    .then((data) => 
+      // console.log("GET USERS DATA >>>> ", data),
+      res.status(200).json(data)
+    )
     .catch((err) => res.status(500).json({ error: err.message }));
 });
 
@@ -58,41 +60,23 @@ router.get("/:id", (req, res) => {
   try {
     // Get user input
     const { username, password } = req.body;
-    
     // Validate user input
     if (!(username && password )) {
       res.status(400).send("All input is required");
     }
-    
     const userQuery = await db.query(`SELECT * FROM users WHERE username = '${ username }'`);
     // Validate if user exist in our database
     if ( userQuery.rowCount == 1 ) {
       const user = userQuery.rows[0]
-
-      console.log("LOGIN USER EXISTS: >>>> ", userQuery.rowCount)
-      console.log("USER PASSWORD: >>>> ", password)
-      console.log("USER ROWS PASSWORD: >>>> ", user.password)  
-
-      if ( await bcrypt.compare(password, user.password) ){
-        console.log("LOGIN PASSWORD MATCHES: >>>> ", await bcrypt.compare(password, user.password))
-        console.log("LOGIN USERNAME: >>>> ", username)
-
+      if ( await bcrypt.compare(password, user.password) ) {
         const userToken = jwt.sign({ username, city: user.city }, process.env.JWT_SECRET_KEY, { expiresIn: "2h" });
-        console.log("LOGIN TOKEN: >>>> ", userToken)
-
         user.token = userToken
-        console.log("LOGIN USER TOKEN: >>>> ", user.token)
-
         req.session.user_id = user.id
-        console.log("LOGIN SESSION: >>>> ", req.session)
-        console.log("LOGIN USER: >>>> ", user)
         return res.status(200).json(user.token);
-
       }
       return res.status(409).send("Invalid Credentials");
     }
      return res.status(409).send("User Doesn't Exist");
-
   } catch (err) {
     console.log(err);
   }
@@ -143,21 +127,12 @@ router.post('/logout', (req, res) => {
 
     // Validate if user exists in our database
     const oldUser = await db.query(`SELECT * FROM users WHERE username = '${ username }'`);
-    console.log("OLD USER: >>>> ", oldUser.rowCount)
     if (oldUser.rowCount > 0) {
       return res.status(409).send({ "status": "User Already Exists. Please Login." });
     }
-
     encryptedPassword = await bcrypt.hash(password, 10);
-
-    console.log("REGISTER USERNAME: >>>> ", username)
-    console.log("REGISTER ENCRYPTEDPASSWORD: >>>> ", encryptedPassword)
-    console.log("REGISTER CITY: >>>> ", city)
-
     await addUser( username, encryptedPassword, city )
-
     const token = jwt.sign({ username, city }, process.env.JWT_SECRET_KEY, { expiresIn: "2h" });
-    console.log("TOKEN: >>>> ", token)
     let user_token = { username: username, city: city, token: token }
 
     getUserByUsername(username)

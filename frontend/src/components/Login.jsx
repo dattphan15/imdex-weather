@@ -78,10 +78,8 @@ export default function Login(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("LOGIN HANDLE SUBMIT: >>>> ")
 
-    loginHandler(username, password).then(() => {
-      console.log("LOGIN HANDLER: HOME PATH >>>>> ", location)
+    loginHandler(username, password).then((data) => {
       history("/home");
       setOpenLogin((prev) => false);
     });

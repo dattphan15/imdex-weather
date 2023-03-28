@@ -1,6 +1,4 @@
-import { Route, Routes, Switch } from "react-router-dom";
-import { useState } from "react";
-import Nav from "./Nav";
+import { Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Home from "./Home";
 // import Account from "./Account";
@@ -9,20 +7,14 @@ import Grid from '@mui/material/Grid';
 
 const Main = (props) => {
 
-  //console.log("MAIN PROPS: >>>> ", props)
-
   const {
-    user,
-    setUser,
     data,
-    location,
     setLocation,
     searchLocation,
-    loginHandler,
     logoutHandler,
   } = props;
 
-  //console.log("MAIN PROPS 2: >>>> ", props)
+  // console.log("MAIN PROPS : >>>> ", props)
 
   return (
     <Grid
