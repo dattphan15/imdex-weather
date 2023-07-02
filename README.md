@@ -26,6 +26,9 @@ Using the **<a href="https://openweathermap.org/api">OpenWeather API</a>**, the 
 * Axios ^0.27.2
 * PostgreSQL ^8.7.3
 
+### Database Setup  
+The Imdex Weather app uses PostgreSQL as the database hosted on AWS RDS. The RDS instance was deleted on July 3rd but can be restored through using the last snapshot in AWS RDS.
+
 ### OpenWeather API Key
 
 1. Create an <code> .env </code> in the **/backend** directory where you'll be providing the required API key. 
